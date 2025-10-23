@@ -6,6 +6,7 @@ local VERSION = "2.3.0"
 local FILE_PATH = "/SCRIPTS/TELEMETRY/iNav/"
 local SMLCD = LCD_W < 212
 local HORUS = LCD_W >= 480 or LCD_H >= 480
+local TX15 = LCD_W == 480 and LCD_H == 320
 local tmp, view, lang, playLog
 local env = "bt" -- compile on platform
 local inav = {}
@@ -535,10 +536,10 @@ function inav.run(event)
 
 		-- Views
 		if data.v ~= config[25].v then
-			view = nil
-			collectgarbage()
-			view = loadScript(FILE_PATH .. (HORUS and (data.nv and "nirvana" or "horus") or (config[25].v == 0 and "view" or (config[25].v == 1 and "pilot" or (config[25].v == 2 and "radar" or "alt")))) .. ext, env)()
-			data.v = config[25].v
+		    view = nil
+		    collectgarbage()
+		    view = loadScript(FILE_PATH .. (HORUS and (TX15 and "tx15" or (data.nv and "nirvana" or "horus")) or (config[25].v == 0 and "view" or (config[25].v == 1 and "pilot" or (config[25].v == 2 and "radar" or "alt")))) .. ext, env)()
+		    data.v = config[25].v
 		end
 		view(data, config, modes, dir, units, labels, gpsDegMin, hdopGraph, icons, calcBearing, calcDir, VERSION, SMLCD, FILE_PATH, text, line, rect, fill, frmt)
 	end
