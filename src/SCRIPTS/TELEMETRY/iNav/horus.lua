@@ -553,7 +553,7 @@ local function view(data, config, modes, dir, units, labels, gpsDegMin, hdopGrap
 		if data.headingHold then
 		   fill((x2 + x3) * 0.5 - 2, (y2 + y3) * 0.5 - 2, 5, 5, SOLID, data.set_flags(0,data.TextColor))
 		else
-		   line(x2, y2, x3, y3, SOLID, data.set_flags(0, GREY))
+		   line(x2, y2, x3, y3, SOLID, data.set_flags(0, data.TextColor))
 		end
 		local tcol = data.set_flags(0, data.TextColor)
 		line(x1, y1, x2, y2, SOLID, tcol)
